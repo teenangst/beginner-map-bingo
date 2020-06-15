@@ -1,0 +1,121 @@
+body {
+	display: grid;
+	min-height: 100vh;
+	#app {
+		display: flex;
+		flex-direction: column;
+		background:#2A2725;
+		color:white;
+		font-family: "tf2_buildtf2";
+		padding:2rem;
+		#title {
+			text-align: center;
+			font-size: 3rem;
+		}
+		#container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom:1rem;
+			#board {
+				--size:14vmin;
+				display: grid;
+				grid-template-columns: repeat(5,var(--size));
+				grid-template-rows: repeat(5,var(--size));
+				grid-gap: 1rem;
+				margin:1rem 0;
+				>div {
+					display: grid;
+					place-items: center;
+					font-size: calc(var(--size)/8);
+					border:0.125rem solid #B2B2B2;
+					border-radius: 1vmin;
+					text-align: center;
+					cursor: pointer;
+					user-select: none;
+					transition: .25s -.1s;
+					&:hover {
+						background-color: rgba(255,215,0,0.1);
+					}
+					&.checked {
+						color:gold;
+						border-color: gold;
+						background-color: rgba(255,215,0,0.1);
+						&.line {
+							position: relative;
+							color:#70B04A;
+							border-color:#70B04A;
+							background-color: rgba(112,176,74,0.1);
+							.sparkle {
+								@keyframes spin {
+									from {
+										transform: translate(-50%,-50%) scale(var(--scale)) rotate(0deg);
+									}
+									to {
+										transform: translate(-50%,-50%) scale(var(--scale)) rotate(360deg);
+									}
+								}
+								@keyframes grow {
+									0%, 100% {
+										width:0%;
+										opacity:0;
+									}
+									25%, 75% {
+										opacity:0;
+									}
+									50% {
+										width:40%;
+										opacity:1;
+									}
+								}
+								position: absolute;
+								width:40%;
+								top:var(--y);
+								left:var(--x);
+								opacity:0;
+								transform: translate(-50%,-50%) scale(var(--scale));
+								animation:
+									spin calc(var(--duration)*0.6789) linear infinite calc(-1 * var(--delay) * 1.61),
+									grow var(--duration) linear infinite var(--delay);
+							}
+						}
+					}
+					&.star {
+						font-size: calc(var(--size)/2);
+						cursor: auto;
+					}
+				}
+			}
+			#buttons {
+				display: flex;
+				font-size: 2rem;
+				>div {
+					border:1px solid white;
+					border-radius: .5rem;
+					cursor: pointer;
+					padding:1rem;
+					margin:0 .5rem;
+					&#clear {
+						&:hover {
+							border-color:#AA0000;
+							color:#AA0000;
+							transition: .25s -.1s;
+						}
+					}
+					&#share {
+						&:hover {
+							border-color:#CF6A32;
+							color:#CF6A32;
+							transition: .25s -.1s;
+						}
+					}
+				}
+			}
+		}
+		#credit {
+			margin-top:auto;
+			color:#A50F79;
+			text-decoration: none;
+		}
+	}
+}
